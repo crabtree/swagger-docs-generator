@@ -1,0 +1,43 @@
+paths:
+  /api/foo:
+    get:
+      tags:
+      - foo
+      description: |
+        Get `Foo` objects
+      responses:
+        200:
+          description: A list of foo items
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Foo"
+
+definitions:
+  FooInfo:
+    properties:
+      name:
+        type: string
+      key:
+        type: string
+    required:
+      - name
+      - key
+    example:
+      name: Some name
+      key: Some key
+
+  Foo:
+    allOf:
+    - $ref: '#/definitions/FooInfo'
+    - type: object
+    - properties:
+        id:
+          description: Internal id of the object
+          type: integer
+    - required:
+        - id
+    example:
+      id: 1
+      name: Some name
+      key: Some key
